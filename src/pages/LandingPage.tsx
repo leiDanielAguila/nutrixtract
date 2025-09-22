@@ -5,12 +5,15 @@ import { useState, useEffect } from "react";
 import { AppShell, Image, Flex, Text, Stack, Button, Box } from "@mantine/core";
 import phone from "../assets/landing-page-phone.png";
 import logo from "../assets/nutri-logo.png";
-import { useMediaQuery } from "@mantine/hooks";
+import { useMediaQuery, useViewportSize } from "@mantine/hooks";
 import ContactUs from "../components/ContactUs";
 import clsx from "clsx";
+import { motion } from "framer-motion";
+import { TypeAnimation } from "react-type-animation";
 
 export default function LandingPage() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { height } = useViewportSize();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +25,22 @@ export default function LandingPage() {
   }, []);
 
   const isMd = useMediaQuery("(min-width: 768px)");
+
+  const scrollToContact = () => {
+    const contactSection = document.querySelector(".contact-us");
+    if (contactSection) {
+      const headerOffset = isMd ? 50 : 60; // Match your header height
+      const elementPosition = contactSection.getBoundingClientRect().top;
+      const offsetPosition =
+        elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <div>
       <AppShell
@@ -44,7 +63,7 @@ export default function LandingPage() {
         >
           <Flex
             className="header-container"
-            justify={'space-between'}
+            justify={"space-between"}
             align="center"
             h="100%"
             px={{ base: 16, md: 26 }}
@@ -81,6 +100,9 @@ export default function LandingPage() {
                     <Text
                       key={item}
                       className="nav-link"
+                      onClick={() =>
+                        item === "Contact us" ? scrollToContact() : null
+                      }
                       style={{
                         fontFamily: "Montserrat, sans-serif",
                         color: "rgba(255, 255, 255, 0.9)",
@@ -122,19 +144,24 @@ export default function LandingPage() {
                 w={{ base: "80%", md: "60%" }}
                 maw={{ base: 250, md: 300 }}
               />
-              <Text
-                ml={{ base: 0, md: 12 }}
-                ta={{ base: "center", md: "left" }}
-                style={{
-                  fontFamily: "Montserrat, sans-serif",
-                  fontWeight: 300,
-                  fontSize: window?.innerWidth < 768 ? 20 : 24,
-                  color: "rgba(255, 255, 255, 0.9)",
-                  textShadow: "1px 1px 3px rgba(0, 0, 0, 0.2)",
-                }}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.0, ease: "easeOut" }}
               >
-                <b>Your daily nutrition tracker</b>
-              </Text>
+                <Text
+                  ml={{ base: 0, md: 12 }}
+                  ta={{ base: "center", md: "left" }}
+                  style={{
+                    fontFamily: "Montserrat, sans-serif",
+                    fontWeight: 600,
+                    fontSize: window?.innerWidth < 768 ? 20 : 24,
+                    color: "rgba(255, 255, 255, 0.9)",
+                  }}
+                >
+                  <b>Your daily nutrition tracker</b>
+                </Text>
+              </motion.div>
               <Text
                 ml={{ base: 0, md: 12 }}
                 mb={17}
@@ -148,10 +175,30 @@ export default function LandingPage() {
                   fontSize: window?.innerWidth < 768 ? 14 : 16,
                 }}
               >
-                Track your daily carbs, protein, and sodium with ease.
+                Monitor daily carbs, protein, and sodium with ease.
                 <b> Nutrixtract</b> insights you need to make smarter food
                 choices.
               </Text>
+              <Box ml={12}>
+                <TypeAnimation
+                  sequence={[
+                    "Track your daily carbs...",
+                    2000,
+                    "Track your protein...",
+                    2000,
+                    "Track your sodium...",
+                    2000,
+                  ]}
+                  speed={70}
+                  repeat={Infinity}
+                  style={{
+                    fontFamily: "Montserrat, sans-serif",
+                    fontWeight: 300,
+                    fontSize: window?.innerWidth < 768 ? 20 : 24,
+                    color: "rgba(255, 255, 255, 0.9)",
+                  }}
+                />
+              </Box>
               {/* Call to Action Buttons  */}
               <Flex
                 justify={{ base: "center", md: "flex-start" }}
@@ -160,27 +207,39 @@ export default function LandingPage() {
                 direction={{ base: "column", sm: "row" }}
               >
                 {/* Download Button */}
-                <Button
-                  className="download-btn"
-                  size="lg"
-                  variant="filled"
-                  color="#556B2F"
-                  radius={"xl"}
-                  w={{ base: "100%", sm: "auto" }}
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 2.2, delay: 0.2 }}
                 >
-                  Download now
-                </Button>
+                  <Button
+                    className="download-btn"
+                    size="lg"
+                    variant="filled"
+                    color="#556B2F"
+                    radius={"xl"}
+                    w={{ base: "100%", sm: "auto" }}
+                  >
+                    Download now
+                  </Button>
+                </motion.div>
                 {/* Learn more Button */}
-                <Button
-                  className="learn-more-btn"
-                  size="lg"
-                  variant="outline"
-                  color="white"
-                  radius={"xl"}
-                  w={{ base: "100%", sm: "auto" }}
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 2.2, delay: 0.2 }}
                 >
-                  Learn more
-                </Button>
+                  <Button
+                    className="learn-more-btn"
+                    size="lg"
+                    variant="outline"
+                    color="white"
+                    radius={"xl"}
+                    w={{ base: "100%", sm: "auto" }}
+                  >
+                    Learn more
+                  </Button>
+                </motion.div>
               </Flex>
             </Stack>
             <Image
@@ -191,7 +250,16 @@ export default function LandingPage() {
               ml={{ base: 0, md: "auto" }}
             />
           </Flex>
-          <ContactUs />
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="contact-us">
+              <ContactUs />
+            </div>
+          </motion.div>
         </AppShell.Main>
       </AppShell>
     </div>
