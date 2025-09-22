@@ -5,16 +5,46 @@ import { useState, useEffect } from "react";
 import { AppShell, Image, Flex, Text, Stack, Button, Box } from "@mantine/core";
 import phone from "../assets/landing-page-phone.png";
 import logo from "../assets/nutri-logo.png";
-import { useMediaQuery, useViewportSize } from "@mantine/hooks";
+import { useMediaQuery } from "@mantine/hooks";
 import ContactUs from "../components/ContactUs";
 import clsx from "clsx";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 
 export default function LandingPage() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const { height } = useViewportSize();
+  const handleDownload = async () => {
+    try {
+      const response = await fetch(
+        "https://nglxfwxexbpbeybkbrvs.supabase.co/storage/v1/object/public/webfiles/info.png"
+      );
 
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "info.png";
+      document.body.appendChild(link);
+      link.click();
+
+      // Clean up
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Download failed:", error);
+      // Fallback to opening in new tab
+      window.open(
+        "https://nglxfwxexbpbeybkbrvs.supabase.co/storage/v1/object/public/webfiles/info.png",
+        "_blank"
+      );
+    }
+  };
+
+  const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50); // Change after 50px scroll
@@ -119,6 +149,7 @@ export default function LandingPage() {
 
               {/* Download button - Shown on both mobile and desktop */}
               <Button
+                onClick={handleDownload}
                 className="download-btn-nav"
                 size="sm"
                 variant="filled"
@@ -213,6 +244,7 @@ export default function LandingPage() {
                   transition={{ duration: 2.2, delay: 0.2 }}
                 >
                   <Button
+                    onClick={handleDownload}
                     className="download-btn"
                     size="lg"
                     variant="filled"
