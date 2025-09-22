@@ -1,4 +1,5 @@
 import LandingPage from './pages/LandingPage';
+
 import './App.css'
 import '@mantine/core/styles.css';
 
