@@ -33,3 +33,23 @@
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
   transform: translateY(-1px);
 }
+
+@media (max-width: 768px) {
+  .nav-link {
+    font-size: 14px !important;
+    margin-right: 12px !important;
+  }
+  
+  .download-btn-nav {
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .phone-image {
+    display: block;  
+    padding-left: 80px;     /* override inline behavior */
+    margin-left: 120px;    /* center horizontally */
+    margin-right: auto;   /* center horizontally */
+  }
+}
