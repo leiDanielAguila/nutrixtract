@@ -8,11 +8,14 @@ import {
   Box,
   Textarea,
   Button,
+  Modal  
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { IconAt, IconUser } from "@tabler/icons-react";
+import { useDisclosure } from '@mantine/hooks';
 
 export default function ContactUs() {
+  const [opened, { open, close }] = useDisclosure(false);
   const emailIcon = <IconAt size={16} />;
   const nameIcon = <IconUser size={16} />;
   const contactUsForm = useForm({
@@ -34,10 +37,16 @@ export default function ContactUs() {
 
   const handleFormSubmit = (values: typeof contactUsForm.values) => {
     console.log(values);
+    open();
   };
 
   return (
     <>
+    <Modal opened={opened} onClose={close} title="To Implement!" centered>
+      <Text ta={'justify'} fw={400} style={{fontFamily: 'Montserrat, sans-serif'}}>
+        Submission of concerns is not yet implemented.
+      </Text>
+    </Modal>
       <Flex 
         mt={48} 
         direction={{ base: "column", md: "row" }}
@@ -86,7 +95,7 @@ export default function ContactUs() {
           </Text>
         </Stack>
         <form onSubmit={contactUsForm.onSubmit(handleFormSubmit)}>
-          <Box w={{ base: "100%", md: 550 }} ml={{ base: 0, md: 48 }}>
+          <Box w={{ base: "100%", md: 550 }} ml={{ base: 0, md: 48 }} >            
             <Stack>
               <TextInput
                 style={{

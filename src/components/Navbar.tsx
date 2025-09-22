@@ -1,17 +1,18 @@
 import "@fontsource/montserrat";
 import "@fontsource/montserrat/700.css";
 import "../pages/landingpage.css";
-import { Flex, Text, Button, Box } from "@mantine/core";
+import { Flex, Text, Button, Box, Notification } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
 import { scrollToContact, handleDownload } from "../utils/landingPage.utils";
 import type { NavbarProps } from "../types/navbar.types";
 
-export default function Navbar({ isScrolled }: NavbarProps) {
+export default function Navbar({ isScrolled, isClicked }: NavbarProps) {
   const isMd = useMediaQuery("(min-width: 768px)");
-
+  
   return (
     <>
+
       <Flex
         className="header-container"
         justify={"space-between"}
@@ -51,9 +52,10 @@ export default function Navbar({ isScrolled }: NavbarProps) {
                 <Text
                   key={item}
                   className="nav-link"
-                  onClick={() =>
-                    item === "Contact us" ? scrollToContact() : null
-                  }
+                  onClick={() => {
+                    item === "Contact us" && scrollToContact();
+                    item === "About us" && isClicked();
+                  }}
                   style={{
                     fontFamily: "Montserrat, sans-serif",
                     color: "rgba(255, 255, 255, 0.9)",

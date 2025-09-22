@@ -2,7 +2,16 @@ import "@fontsource/montserrat";
 import "@fontsource/montserrat/700.css";
 import "../pages/landingpage.css";
 import { useState, useEffect } from "react";
-import { AppShell, Image, Flex, Text, Stack, Button, Box } from "@mantine/core";
+import {
+  AppShell,
+  Image,
+  Flex,
+  Text,
+  Stack,
+  Button,
+  Box,
+  Notification,
+} from "@mantine/core";
 import phone from "../assets/landing-page-phone.png";
 import logo from "../assets/nutri-logo.png";
 import { useMediaQuery } from "@mantine/hooks";
@@ -13,10 +22,18 @@ import { handleDownload } from "../utils/landingPage.utils";
 import Navbar from "../components/Navbar";
 
 export default function LandingPage() {
+  const [showNotification, setShowNotification] = useState(false);
+
+  const handleDevelopingClick = () => {
+    setShowNotification(true);
+    // Hide after 3 seconds
+    setTimeout(() => setShowNotification(false), 3000);
+  };
+
   const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50); // Change after 50px scroll
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -25,8 +42,39 @@ export default function LandingPage() {
 
   const isMd = useMediaQuery("(min-width: 768px)");
 
+  const aboutUsNotifTitle = () => {
+    return <Text fw={700}>Still Developing!</Text>;
+  };
+
   return (
     <div>
+      {/* Fixed notification that floats in bottom right */}
+      {showNotification && (
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0., delay: 0.2 }}
+        >
+          <Notification
+            title={aboutUsNotifTitle()}
+            color="lime"
+            onClose={() => setShowNotification(false)}
+            style={{
+              position: "fixed",
+              bottom: "20px",
+              right: "20px",
+              zIndex: 9999,
+              width: "50%",
+              boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+            }}
+          >
+            <Text style={{ fontFamily: "Montserrat" }}>
+              This part of the website is still not available.
+            </Text>
+          </Notification>
+        </motion.div>
+      )}
+
       <AppShell
         padding={{ base: "xs", md: "md" }}
         header={{ height: { base: 60, md: 50 } }}
@@ -37,16 +85,15 @@ export default function LandingPage() {
         <AppShell.Header
           className="header-container"
           style={{
-            background: isScrolled
-              ? "rgba(143, 163, 30, 0.95)" // Scrolled color (with opacity)
-              : "transparent", // Original transparent
+            background: isScrolled ? "rgba(143, 163, 30, 0.95)" : "transparent",
             border: 0,
-            transition: "background-color 0.9s ease", // Smooth transition
-            backdropFilter: isScrolled ? "blur(10px)" : "none", // Optional blur effect
+            transition: "background-color 0.9s ease",
+            backdropFilter: isScrolled ? "blur(10px)" : "none",
           }}
         >
-          <Navbar isScrolled={isScrolled} />
+          <Navbar isScrolled={isScrolled} isClicked={handleDevelopingClick} />
         </AppShell.Header>
+
         <AppShell.Main>
           <Flex direction={{ base: "column", md: "row" }}>
             <Stack
@@ -115,14 +162,12 @@ export default function LandingPage() {
                   }}
                 />
               </Box>
-              {/* Call to Action Buttons  */}
               <Flex
                 justify={{ base: "center", md: "flex-start" }}
                 gap="md"
                 ml={{ base: 0, md: 9 }}
                 direction={{ base: "column", sm: "row" }}
               >
-                {/* Download Button */}
                 <motion.div
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
@@ -140,13 +185,13 @@ export default function LandingPage() {
                     Download now
                   </Button>
                 </motion.div>
-                {/* Learn more Button */}
                 <motion.div
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 2.2, delay: 0.2 }}
                 >
                   <Button
+                    onClick={handleDevelopingClick}
                     className="learn-more-btn"
                     size="lg"
                     variant="outline"
