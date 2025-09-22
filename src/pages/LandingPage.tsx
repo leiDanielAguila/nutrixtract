@@ -7,43 +7,12 @@ import phone from "../assets/landing-page-phone.png";
 import logo from "../assets/nutri-logo.png";
 import { useMediaQuery } from "@mantine/hooks";
 import ContactUs from "../components/ContactUs";
-import clsx from "clsx";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
+import { handleDownload } from "../utils/landingPage.utils";
+import Navbar from "../components/Navbar";
 
 export default function LandingPage() {
-  const handleDownload = async () => {
-    try {
-      const response = await fetch(
-        "https://nglxfwxexbpbeybkbrvs.supabase.co/storage/v1/object/public/webfiles/info.png"
-      );
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "info.png";
-      document.body.appendChild(link);
-      link.click();
-
-      // Clean up
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error("Download failed:", error);
-      // Fallback to opening in new tab
-      window.open(
-        "https://nglxfwxexbpbeybkbrvs.supabase.co/storage/v1/object/public/webfiles/info.png",
-        "_blank"
-      );
-    }
-  };
-
   const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
@@ -55,21 +24,6 @@ export default function LandingPage() {
   }, []);
 
   const isMd = useMediaQuery("(min-width: 768px)");
-
-  const scrollToContact = () => {
-    const contactSection = document.querySelector(".contact-us");
-    if (contactSection) {
-      const headerOffset = isMd ? 50 : 60; // Match your header height
-      const elementPosition = contactSection.getBoundingClientRect().top;
-      const offsetPosition =
-        elementPosition + window.pageYOffset - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
-  };
 
   return (
     <div>
@@ -91,76 +45,7 @@ export default function LandingPage() {
             backdropFilter: isScrolled ? "blur(10px)" : "none", // Optional blur effect
           }}
         >
-          <Flex
-            className="header-container"
-            justify={"space-between"}
-            align="center"
-            h="100%"
-            px={{ base: 16, md: 26 }}
-          >
-            {/* Logo - Shows on mobile always, on desktop only when scrolled */}
-            <Box display={{ base: "block", md: "block" }}>
-              <Text
-                className={clsx("nav-link", "nav-logo", {
-                  visible: !isMd || isScrolled, // always visible in mobile, scroll-gated in desktop
-                })}
-                style={{
-                  fontFamily: "Montserrat, sans-serif",
-                  color: "rgba(255, 255, 255, 0.9)",
-                  fontSize: 16,
-                  fontWeight: 600,
-                }}
-              >
-                Nutrixtract
-              </Text>
-            </Box>
-
-            {/* Right side navigation container */}
-            <Flex
-              className="nav-items-container"
-              justify="flex-end"
-              align="center"
-              gap={{ base: "sm", md: "xl" }}
-              wrap="wrap"
-            >
-              {/* Desktop Navigation - Hidden on mobile */}
-              <Box display={{ base: "none", md: "block" }}>
-                <Flex gap="xl">
-                  {["Home", "About us", "Contact us"].map((item) => (
-                    <Text
-                      key={item}
-                      className="nav-link"
-                      onClick={() =>
-                        item === "Contact us" ? scrollToContact() : null
-                      }
-                      style={{
-                        fontFamily: "Montserrat, sans-serif",
-                        color: "rgba(255, 255, 255, 0.9)",
-                        fontSize: 18,
-                        fontWeight: 500,
-                        cursor: "pointer",
-                      }}
-                    >
-                      {item}
-                    </Text>
-                  ))}
-                </Flex>
-              </Box>
-
-              {/* Download button - Shown on both mobile and desktop */}
-              <Button
-                onClick={handleDownload}
-                className="download-btn-nav"
-                size="sm"
-                variant="filled"
-                color="#556B2F"
-                radius="xl"
-                style={{ fontFamily: "Montserrat, sans-serif" }}
-              >
-                Download
-              </Button>
-            </Flex>
-          </Flex>
+          <Navbar isScrolled={isScrolled} />
         </AppShell.Header>
         <AppShell.Main>
           <Flex direction={{ base: "column", md: "row" }}>
