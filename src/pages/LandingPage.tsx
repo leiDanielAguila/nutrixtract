@@ -1,5 +1,6 @@
 import "@fontsource/montserrat";
 import "@fontsource/montserrat/700.css";
+import "../pages/landingpage.css";
 import { AppShell, Image, Flex, Text, Stack, Button } from "@mantine/core";
 import phone from "../assets/landing-page-phone.png";
 import logo from "../assets/nutri-logo.png";
@@ -14,9 +15,60 @@ export default function LandingPage() {
           backgroundImage: "linear-gradient(to top left, #C6D870, #8FA31E)",
         }}
       >
-        <AppShell.Header
-          style={{ background: "transparent", border: 0 }}
-        ></AppShell.Header>
+        <AppShell.Header style={{ background: "transparent", border: 0 }}>
+          <Flex justify={"flex-end"} mr={26} align="center" h="100%" gap={"xl"}>
+            <Text
+              className="nav-link"
+              style={{
+                fontFamily: "Montserrat, sans-serif",
+                color: "rgba(255, 255, 255, 0.9)",
+                fontSize: 18,
+                fontWeight: 500,
+                cursor: "pointer",
+                marginRight: 24,
+              }}
+            >
+              Home
+            </Text>
+            <Text
+              className="nav-link"
+              style={{
+                fontFamily: "Montserrat, sans-serif",
+                color: "rgba(255, 255, 255, 0.9)",
+                fontSize: 18,
+                fontWeight: 500,
+                cursor: "pointer",
+                marginRight: 24,
+              }}
+            >
+              About us
+            </Text>
+            <Text
+              className="nav-link"
+              style={{
+                fontFamily: "Montserrat, sans-serif",
+                color: "rgba(255, 255, 255, 0.9)",
+                fontSize: 18,
+                fontWeight: 500,
+                cursor: "pointer",
+                marginRight: 0,
+              }}
+            >
+              Contact us
+            </Text>
+            <Button
+              mt={4}
+              className="download-btn-nav"
+              size="md"
+              variant="filled"
+              color="#556B2F"
+              radius={"xl"}
+              style={{fontFamily: 'Montserrat, sans-serif'}}
+            >
+              Download
+            </Button>
+          </Flex>
+        </AppShell.Header>
         <AppShell.Main>
           <Flex>
             <Stack justify="center" ml={32} mb={"120"}>
@@ -35,6 +87,7 @@ export default function LandingPage() {
               </Text>
               <Text
                 ml={12}
+                mb={17}
                 ta="justify"
                 mt={4}
                 style={{
@@ -49,18 +102,25 @@ export default function LandingPage() {
                 choices.
               </Text>
               {/* Call to Action Buttons  */}
-              <Flex justify={"center"} gap={"md"}>
-                 {/* Download Button */}
-                <Button 
+              <Flex justify={"flex-start"} gap={"md"} ml={9}>
+                {/* Download Button */}
+                <Button
+                  className="download-btn"
                   size="lg"
                   variant="filled"
-                  color="#8FA31E"
+                  color="#556B2F"
                   radius={"xl"}
                 >
                   Download now
                 </Button>
-                 {/* Learn more Button next time na siguro to lagyan */}
-                <Button size="lg" variant="outline" color="white" radius={"xl"}>
+                {/* Learn more Button next time na siguro to lagyan */}
+                <Button
+                  className="learn-more-btn"
+                  size="lg"
+                  variant="outline"
+                  color="white"
+                  radius={"xl"}
+                >
                   Learn more
                 </Button>
               </Flex>
