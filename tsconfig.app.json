@@ -23,5 +23,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "postcss.congif.cjs"]
+  "include": ["src", "postcss.congif.cjs", "src/declarations.d.ts"]
 }

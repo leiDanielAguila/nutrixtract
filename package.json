@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource-variable/montserrat": "^5.2.8",
+    "@fontsource/montserrat": "^5.2.8",
     "@mantine/carousel": "^8.3.1",
     "@mantine/core": "^8.3.1",
     "@mantine/dropzone": "^8.3.1",
