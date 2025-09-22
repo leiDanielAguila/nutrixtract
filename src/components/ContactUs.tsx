@@ -86,7 +86,7 @@ export default function ContactUs() {
           </Text>
         </Stack>
         <form onSubmit={contactUsForm.onSubmit(handleFormSubmit)}>
-          <Box w={{ base: "100%", md: 550 }}>
+          <Box w={{ base: "100%", md: 550 }} ml={{ base: 0, md: 48 }}>
             <Stack>
               <TextInput
                 style={{
@@ -103,6 +103,7 @@ export default function ContactUs() {
                 leftSection={nameIcon}
                 label="Full Name"
                 placeholder="Your name"
+                radius={'xl'}
               />
               <TextInput
                 style={{
@@ -119,6 +120,7 @@ export default function ContactUs() {
                 leftSection={emailIcon}
                 label="Email"
                 placeholder="Your email"
+                radius={'xl'}
               />
               <Textarea
                 style={{
@@ -129,25 +131,27 @@ export default function ContactUs() {
                   fontSize: window?.innerWidth < 768 ? 14 : 16,
                 }}
                 autosize
-                minRows={2}
-                maxRows={6}
+                minRows={4}
+                maxRows={8}
                 key={contactUsForm.key("concern")}
                 {...contactUsForm.getInputProps("concern")}
                 label="Your concern"
                 placeholder="How can we help?"
+                radius={'lg'}
               />
               <Button
                 fullWidth
-                radius={"md"}
+                radius={"xl"}
                 variant="filled"
                 color="#556B2F"
                 type="submit"
+                style={{marginTop: 32}}
               >
                 Submit
               </Button>
               <Text ta={{ base: "center", md: "justify" }}>
                 By contacting us, you agree to our {<b>Terms of service</b>} and{" "}
-                {<b>Privacy Policy</b>}
+                {<b>Privacy Policy</b>}.
               </Text>
             </Stack>
           </Box>
