@@ -1,7 +1,7 @@
 import "@fontsource/montserrat";
 import "@fontsource/montserrat/700.css";
 import "../pages/landingpage.css";
-import { Flex, Text, Button, Box, Notification } from "@mantine/core";
+import { Flex, Text, Button, Box } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
 import { scrollToContact, handleDownload } from "../utils/landingPage.utils";
