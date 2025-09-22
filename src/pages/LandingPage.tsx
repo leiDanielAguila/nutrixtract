@@ -1,12 +1,26 @@
 import "@fontsource/montserrat";
 import "@fontsource/montserrat/700.css";
 import "../pages/landingpage.css";
+import { useState, useEffect } from "react";
 import { AppShell, Image, Flex, Text, Stack, Button, Box } from "@mantine/core";
 import phone from "../assets/landing-page-phone.png";
 import logo from "../assets/nutri-logo.png";
 import { useMediaQuery } from "@mantine/hooks";
+import ContactUs from "../components/ContactUs";
+import clsx from "clsx";
 
 export default function LandingPage() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50); // Change after 50px scroll
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const isMd = useMediaQuery("(min-width: 768px)");
   return (
     <div>
@@ -17,20 +31,30 @@ export default function LandingPage() {
           backgroundImage: "linear-gradient(to top left, #C6D870, #8FA31E)",
         }}
       >
-        <AppShell.Header style={{ backgroundColor: "transparent", border: 0 }}>
+        <AppShell.Header
+          className="header-container"
+          style={{
+            background: isScrolled
+              ? "rgba(143, 163, 30, 0.95)" // Scrolled color (with opacity)
+              : "transparent", // Original transparent
+            border: 0,
+            transition: "background-color 0.9s ease", // Smooth transition
+            backdropFilter: isScrolled ? "blur(10px)" : "none", // Optional blur effect
+          }}
+        >
           <Flex
-            justify={{ base: "space-between", md: "flex-end" }}
-            mr={{ base: 16, md: 26 }}
-            ml={{ base: 16, md: 0 }}
+            className="header-container"
+            justify={'space-between'}
             align="center"
             h="100%"
-            gap={{ base: "sm", md: "xl" }}
-            wrap="wrap"
+            px={{ base: 16, md: 26 }}
           >
-            {/* Mobile Logo - Only shows on mobile */}
-            <Box display={{ base: "block", md: "none" }}>
+            {/* Logo - Shows on mobile always, on desktop only when scrolled */}
+            <Box display={{ base: "block", md: "block" }}>
               <Text
-                className="nav-link"
+                className={clsx("nav-link", "nav-logo", {
+                  visible: !isMd || isScrolled, // always visible in mobile, scroll-gated in desktop
+                })}
                 style={{
                   fontFamily: "Montserrat, sans-serif",
                   color: "rgba(255, 255, 255, 0.9)",
@@ -42,38 +66,47 @@ export default function LandingPage() {
               </Text>
             </Box>
 
-            {/* Desktop Navigation - Hidden on mobile */}
-            <Box display={{ base: "none", md: "block" }}>
-              <Flex gap="xl">
-                {["Home", "About us", "Contact us"].map((item) => (
-                  <Text
-                    key={item}
-                    className="nav-link"
-                    style={{
-                      fontFamily: "Montserrat, sans-serif",
-                      color: "rgba(255, 255, 255, 0.9)",
-                      fontSize: 18,
-                      fontWeight: 500,
-                      cursor: "pointer",
-                    }}
-                  >
-                    {item}
-                  </Text>
-                ))}
-              </Flex>
-            </Box>
-
-            {/* Download button - Shown on both mobile and desktop */}
-            <Button
-              className="download-btn-nav"
-              size="sm"
-              variant="filled"
-              color="#556B2F"
-              radius="xl"
-              style={{ fontFamily: "Montserrat, sans-serif" }}
+            {/* Right side navigation container */}
+            <Flex
+              className="nav-items-container"
+              justify="flex-end"
+              align="center"
+              gap={{ base: "sm", md: "xl" }}
+              wrap="wrap"
             >
-              Download
-            </Button>
+              {/* Desktop Navigation - Hidden on mobile */}
+              <Box display={{ base: "none", md: "block" }}>
+                <Flex gap="xl">
+                  {["Home", "About us", "Contact us"].map((item) => (
+                    <Text
+                      key={item}
+                      className="nav-link"
+                      style={{
+                        fontFamily: "Montserrat, sans-serif",
+                        color: "rgba(255, 255, 255, 0.9)",
+                        fontSize: 18,
+                        fontWeight: 500,
+                        cursor: "pointer",
+                      }}
+                    >
+                      {item}
+                    </Text>
+                  ))}
+                </Flex>
+              </Box>
+
+              {/* Download button - Shown on both mobile and desktop */}
+              <Button
+                className="download-btn-nav"
+                size="sm"
+                variant="filled"
+                color="#556B2F"
+                radius="xl"
+                style={{ fontFamily: "Montserrat, sans-serif" }}
+              >
+                Download
+              </Button>
+            </Flex>
           </Flex>
         </AppShell.Header>
         <AppShell.Main>
@@ -81,7 +114,7 @@ export default function LandingPage() {
             <Stack
               justify="center"
               align={isMd ? "flex-start" : "center"}
-              ml={isMd ? 32 : 16}
+              ml={isMd ? 32 : 0}
               mb={isMd ? 120 : 40}
             >
               <Image
@@ -158,6 +191,7 @@ export default function LandingPage() {
               ml={{ base: 0, md: "auto" }}
             />
           </Flex>
+          <ContactUs />
         </AppShell.Main>
       </AppShell>
     </div>
