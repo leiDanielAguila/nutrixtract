@@ -27,6 +27,7 @@ export default function LandingPage() {
   const handleDevelopingClick = () => {
     setShowNotification(true);
     // Hide after 3 seconds
+
     setTimeout(() => setShowNotification(false), 3000);
   };
 
@@ -53,7 +54,7 @@ export default function LandingPage() {
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0., delay: 0.2 }}
+          transition={{ duration: 0, delay: 0.2 }}
         >
           <Notification
             title={aboutUsNotifTitle()}
@@ -173,17 +174,22 @@ export default function LandingPage() {
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 2.2, delay: 0.2 }}
                 >
-                  <Button
-                    onClick={handleDownload}
-                    className="download-btn"
-                    size="lg"
-                    variant="filled"
-                    color="#556B2F"
-                    radius={"xl"}
-                    w={{ base: "100%", sm: "auto" }}
+                  <a
+                    href="https://drive.google.com/uc?export=download&id=1zn_DRa_W3btqnzmWsKYQZ1V5ysyvE3ZO
+"
+                    download
                   >
-                    Download now
-                  </Button>
+                    <Button                      
+                      className="download-btn"
+                      size="lg"
+                      variant="filled"
+                      color="#556B2F"
+                      radius={"xl"}
+                      w={{ base: "100%", sm: "auto" }}
+                    >
+                      Download now
+                    </Button>
+                  </a>
                 </motion.div>
                 <motion.div
                   initial={{ scale: 0.8, opacity: 0 }}
