@@ -4,7 +4,7 @@ import "../pages/landingpage.css";
 import { Flex, Text, Button, Box } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
-import { scrollToContact, handleDownload } from "../utils/landingPage.utils";
+import { scrollToContact } from "../utils/landingPage.utils";
 import type { NavbarProps } from "../types/navbar.types";
 
 export default function Navbar({ isScrolled, isClicked }: NavbarProps) {

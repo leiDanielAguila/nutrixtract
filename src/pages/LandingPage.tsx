@@ -18,7 +18,6 @@ import { useMediaQuery } from "@mantine/hooks";
 import ContactUs from "../components/ContactUs";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
-import { handleDownload } from "../utils/landingPage.utils";
 import Navbar from "../components/Navbar";
 
 export default function LandingPage() {
