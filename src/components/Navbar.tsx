@@ -9,10 +9,9 @@ import type { NavbarProps } from "../types/navbar.types";
 
 export default function Navbar({ isScrolled, isClicked }: NavbarProps) {
   const isMd = useMediaQuery("(min-width: 768px)");
-  
+
   return (
     <>
-
       <Flex
         className="header-container"
         justify={"space-between"}
@@ -71,17 +70,22 @@ export default function Navbar({ isScrolled, isClicked }: NavbarProps) {
           </Box>
 
           {/* Download button - Shown on both mobile and desktop */}
-          <Button
-            onClick={handleDownload}
-            className="download-btn-nav"
-            size="sm"
-            variant="filled"
-            color="#556B2F"
-            radius="xl"
-            style={{ fontFamily: "Montserrat, sans-serif" }}
+          <a
+            href="https://drive.google.com/uc?export=download&id=1zn_DRa_W3btqnzmWsKYQZ1V5ysyvE3ZO
+"
+            download
           >
-            Download
-          </Button>
+            <Button
+              className="download-btn-nav"
+              size="sm"
+              variant="filled"
+              color="#556B2F"
+              radius="xl"
+              style={{ fontFamily: "Montserrat, sans-serif" }}
+            >
+              Download
+            </Button>
+          </a>
         </Flex>
       </Flex>
     </>
