@@ -7,7 +7,7 @@ import clsx from "clsx";
 import { scrollToElement } from "../utils/landingPage.utils";
 import type { NavbarProps } from "../types/navbar.types";
 
-export default function Navbar({ isScrolled, isClicked }: NavbarProps) {
+export default function Navbar({ isScrolled }: NavbarProps) {
   const isMd = useMediaQuery("(min-width: 768px)");
 
   return (
@@ -54,7 +54,7 @@ export default function Navbar({ isScrolled, isClicked }: NavbarProps) {
                   onClick={() => {
                     item === "Home" && scrollToElement(".home")
                     item === "Contact us" && scrollToElement(".contact-us");
-                    item === "About us" && isClicked();
+                    item === "About us" && scrollToElement(".about-us");
                   }}
                   style={{
                     fontFamily: "Montserrat, sans-serif",

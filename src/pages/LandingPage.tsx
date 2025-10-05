@@ -19,6 +19,7 @@ import ContactUs from "../components/ContactUs";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import Navbar from "../components/Navbar";
+import AboutUs from "../components/AboutUs";
 
 export default function LandingPage() {
   const [showNotification, setShowNotification] = useState(false);
@@ -96,7 +97,7 @@ export default function LandingPage() {
         </AppShell.Header>
 
         <AppShell.Main>
-          <Flex className="home"direction={{ base: "column", md: "row" }}>
+          <Flex className="home" direction={{ base: "column", md: "row" }}>
             <Stack
               justify="center"
               align={isMd ? "flex-start" : "center"}
@@ -218,6 +219,9 @@ export default function LandingPage() {
               ml={{ base: 0, md: "auto" }}
             />
           </Flex>
+          <div className="about-us">
+            <AboutUs />
+          </div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
