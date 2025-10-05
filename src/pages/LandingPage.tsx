@@ -219,9 +219,16 @@ export default function LandingPage() {
               ml={{ base: 0, md: "auto" }}
             />
           </Flex>
-          <div className="about-us">
-            <AboutUs />
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="about-us">
+              <AboutUs />
+            </div>
+          </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
