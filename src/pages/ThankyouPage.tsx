@@ -55,7 +55,8 @@ export default function ThankyouPage() {
               Your <b>Email</b> has been confirmed, feel free to open the
               application again.
             </Text>
-            <Button
+            <a href="https://nutrixtract.vercel.app/">
+              <Button
               className="download-btn"
               size="lg"
               variant="filled"
@@ -65,6 +66,7 @@ export default function ThankyouPage() {
             >
               Go to Website
             </Button>
+            </a>
           </Stack>
         </Center>
       </AppShellMain>
