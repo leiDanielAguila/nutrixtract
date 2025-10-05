@@ -4,7 +4,7 @@ import "../pages/landingpage.css";
 import { Flex, Text, Button, Box } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import clsx from "clsx";
-import { scrollToContact } from "../utils/landingPage.utils";
+import { scrollToElement } from "../utils/landingPage.utils";
 import type { NavbarProps } from "../types/navbar.types";
 
 export default function Navbar({ isScrolled, isClicked }: NavbarProps) {
@@ -52,7 +52,8 @@ export default function Navbar({ isScrolled, isClicked }: NavbarProps) {
                   key={item}
                   className="nav-link"
                   onClick={() => {
-                    item === "Contact us" && scrollToContact();
+                    item === "Home" && scrollToElement(".home")
+                    item === "Contact us" && scrollToElement(".contact-us");
                     item === "About us" && isClicked();
                   }}
                   style={{

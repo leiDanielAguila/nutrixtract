@@ -31,6 +31,7 @@ export default function LandingPage() {
   };
 
   const [isScrolled, setIsScrolled] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -95,7 +96,7 @@ export default function LandingPage() {
         </AppShell.Header>
 
         <AppShell.Main>
-          <Flex direction={{ base: "column", md: "row" }}>
+          <Flex className="home"direction={{ base: "column", md: "row" }}>
             <Stack
               justify="center"
               align={isMd ? "flex-start" : "center"}
@@ -178,7 +179,7 @@ export default function LandingPage() {
 "
                     download
                   >
-                    <Button                      
+                    <Button
                       className="download-btn"
                       size="lg"
                       variant="filled"
