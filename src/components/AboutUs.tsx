@@ -2,7 +2,7 @@ import "@fontsource/montserrat";
 import "@fontsource/montserrat/700.css";
 import { Flex, Text, Stack, Image } from "@mantine/core";
 
-import team from "../assets/nutriteam.png";
+import team from "../assets/teamscaffy.png";
 import { useMediaQuery } from "@mantine/hooks";
 
 export default function AboutUs() {
