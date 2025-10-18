@@ -73,7 +73,7 @@ export default function Navbar({ isScrolled }: NavbarProps) {
           {/* Download button - Shown on both mobile and desktop */}
           {/* new comment */}
           <a
-            href="https://github.com/SeanArnisto/nutrivision-frontend-main/releases/download/1.0.1/Nutrixtract.apk
+            href="https://github.com/SeanArnisto/nutrivision-frontend-main/releases/download/1.0.2/Nutrixtract.apk
 "
             download
           >

@@ -176,7 +176,7 @@ export default function LandingPage() {
                   transition={{ duration: 2.2, delay: 0.2 }}
                 >
                   <a
-                    href="https://github.com/SeanArnisto/nutrivision-frontend-main/releases/download/1.0.1/Nutrixtract.apk
+                    href="https://github.com/SeanArnisto/nutrivision-frontend-main/releases/download/1.0.2/Nutrixtract.apk
 "
                     download
                   >
@@ -197,17 +197,22 @@ export default function LandingPage() {
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ duration: 2.2, delay: 0.2 }}
                 >
-                  <Button
-                    onClick={handleDevelopingClick}
-                    className="learn-more-btn"
-                    size="lg"
-                    variant="outline"
-                    color="white"
-                    radius={"xl"}
-                    w={{ base: "100%", sm: "auto" }}
+                  <a
+                    href="https://github.com/SeanArnisto/nutrivision-frontend-main/releases/download/1.0.2/NutriXtract_User_Manual.pdf
+"
+                    download
                   >
-                    Learn more
-                  </Button>
+                    <Button
+                      className="learn-more-btn"
+                      size="lg"
+                      variant="outline"
+                      color="white"
+                      radius={"xl"}
+                      w={{ base: "100%", sm: "auto" }}
+                    >
+                      Download Manual
+                    </Button>
+                  </a>
                 </motion.div>
               </Flex>
             </Stack>
